@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <h1 class="subtitle has-text-centered">Bucket List:</h1>
+    <h1 class="subtitle has-text-centered">Bucket List</h1>
     <hr />
     <div class="field has-addons">
       <div class="control is-expanded">
-        <input class="input" v-model="description" type="text" placeholder="Go to mars..." />
+        <input class="input" v-model="description" type="text" placeholder="Go to mars..." @keyup.enter="addItem"/>
       </div>
       <div class="control">
         <a class="button is-info" @click="addItem" :disabled="!description">Add</a>
@@ -12,7 +12,7 @@
     </div>
     <div class="notification" v-for="(item, i) in items" :key="item._id">
       <div class="columns">
-        <input class="column input" v-if="isSelected(item)" v-model="editedDescription" />
+        <input class="column input" v-if="isSelected(item)" v-model="editedDescription" @keyup.enter="updateItem(item, i)" />
         <p v-else class="column">
           <span class="tag is-primary">{{ i + 1}}</span>
           {{ item.description }}
